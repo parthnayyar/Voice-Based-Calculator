@@ -8,7 +8,8 @@ def a():
         audio=r.listen(source)
         try:
             text=r.recognize_google(audio)
-            conv_in=[('x','*'),('into','*'),('by','/'),('sin','math.sin('),('cos','math.cos('),('tan','math.tan('),('raise to the power','**')]
+            print(text)
+            conv_in=[('x','*'),('into','*'),('by','/'),('sign','math.sin('),('cos','math.cos('),('tangent','math.tan('),('power','**')]
             for i in conv_in:
                 j,k=i
                 text=text.replace(j,k)
@@ -51,6 +52,9 @@ def a():
         except:
             print('Could not detect voice. Please try again.')
 
+
+print("Voice commands accepted: \nplus\nminus\nmultiply by\ninto\nby\ndivide by\nsin\ncos\ntangent\nsquare\nsquare root of\ncube\ncube root of\npower\n\n")
+
 while True:
     inp=int(input('1 -> Manually type mathematical expression\n2 -> Use speech recognition to input mathematical expression\n3 -> Exit\nEnter your command: '))
     if inp==1:
@@ -71,5 +75,3 @@ while True:
         print('Please enter a valid input.\n')
         print()
         continue
-
-
