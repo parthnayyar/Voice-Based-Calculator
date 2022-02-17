@@ -1,19 +1,23 @@
 import math, speech_recognition as sr
 
+
 def a():
     r=sr.Recognizer()
     with sr.Microphone() as source:
-        r.adjust_for_ambient_noise(source,duration=1)
+        r.adjust_for_ambient_noise(source,duration = 1)
         print('Speak now 🎙️')
-        audio=r.listen(source)
-        try:
-            text=r.recognize_google(audio)
-            print(text)
+        audio=r.listen(source) # take voice input
+        try: 
+            text=r.recognize_google(audio) # recognize voice input
+            text=text.lower()
             conv_in=[('x','*'),('into','*'),('by','/'),('sign','math.sin('),('cos','math.cos('),('tangent','math.tan('),('power','**')]
+            # list to help convert user language to code language
             for i in conv_in:
                 j,k=i
                 text=text.replace(j,k)
             inp_eqn=text+' '
+            
+            # convert user language to code language without .replace function
             l=len(inp_eqn)
             for i in range(l):
                 if inp_eqn[i:i+6]=='square':
@@ -40,8 +44,9 @@ def a():
                             inp_eqn=inp_eqn[:j]+' ) '+inp_eqn[j+1:]
                             break
             try:
-                ans=eval(inp_eqn)
-                conv_out=[('math.sqrt','√'),('math.sin','sin'),('math.cos','cos'),('math.tan','tan'),(' + ','+'),(' - ','-'),(' * ','✕'),(' / ','/'),(' ** ','^')]
+                ans = eval(inp_eqn)
+                conv_out=[('math.sqrt','√'),('math.sin','sin'),('math.cos','cos'),('math.tan','tan'),(' + ',' + '),(' - ',' - '),(' * ',' ✕ '),(' / ',' / '),(' ** ',' ^ ')]
+                # list to convert code language back to user language
                 for i in conv_out:
                     j,k=i
                     inp_eqn=inp_eqn.replace(j,k)
@@ -53,25 +58,8 @@ def a():
             print('Could not detect voice. Please try again.')
 
 
-print("Voice commands accepted: \nplus\nminus\nmultiply by\ninto\nby\ndivide by\nsin\ncos\ntangent\nsquare\nsquare root of\ncube\ncube root of\npower\n\n")
+print("Voice commands accepted: \nplus\nminus\nmultiply by\ninto\nby\ndivide by\nsin\ncos\ntangent\nsquare\nsquare root of\ncube\ncube root of\npower\n\nNote: this is a very basic calculator and only accepts 'easy' calculations.\n\n\n")
 
 while True:
-    inp=int(input('1 -> Manually type mathematical expression\n2 -> Use speech recognition to input mathematical expression\n3 -> Exit\nEnter your command: '))
-    if inp==1:
-        try:
-            print('Answer: '+str(eval(input('Type mathematical expression: '))))
-        except:
-            print('Could not interpret. Please try again.')
-        print()
-        continue
-    elif inp==2:
-        a()
-        print()
-        continue
-    elif inp==3:
-        print('Thank you for using this program.')
-        break
-    else:
-        print('Please enter a valid input.\n')
-        print()
-        continue
+    a()
+    print()
