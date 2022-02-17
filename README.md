@@ -1,3 +1,3 @@
 # Voice-Based-Calculator
 
-This is a calculator which uses speech as well as text input to calculate the given question.
+This is a calculator which uses speech recognition library to interpret user voice input and calculate the given question.
